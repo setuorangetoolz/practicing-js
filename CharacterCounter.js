@@ -2,15 +2,13 @@ const CharacterCounter = (str,char) => {
     str = str.toLowerCase()
     char = char.toLowerCase()
 
-    letters = str.split("")
+    let letters = str.split("")
 
-    totalCount = letters.reduce((accum,curr)=>{
-        if (curr === char){
+    return letters.reduce((accum, curr) => {  //Local variable totalCount is redundant
+        if (curr === char) {
             accum++
         }
         return accum
-    },0)
-
-    return totalCount
+    }, 0)
 }
 console.log(CharacterCounter("Assessors",'S'))
