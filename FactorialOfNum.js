@@ -1,7 +1,16 @@
 const FactorialOfNum = (num) => {
-  if(num === 0 ) return 1;
-  if(num < 0 ) return false;
-  return num*FactorialOfNum(num - 1);
+  //with recursion method
+  // if(num === 0 ) return 1;
+  // if(num < 0 ) return false;
+  // return num*FactorialOfNum(num - 1);
+
+  //with for loop
+  let fact = 1
+  for(let i = 1; i <= num; i++){
+    fact = fact * i;
+  }
+  return fact
+
 }
 
 console.log(FactorialOfNum(0))
