@@ -1,13 +1,68 @@
-const StarPattern  = () => {
-    let string = ""
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+<div class="main">
+    <div style="display: flex;gap: 20px;margin-bottom: 10px">
+        <div class="top-left"></div>
+        <div class="top-right"></div>
+    </div>
+    <div style="display: flex;gap: 20px">
+        <div class="bottom-left"></div>
+        <div class="bottom-right"></div>
+    </div>
+</div>
+
+<script>
+
+    let topLeftStars = ""
+    let topRightStars = ""
+    let bottomLeftStars = ""
+    let bottomRightStars = ""
+
+    for (let i = 1; i <= 5; i++) {
+        for (let k = 0; k < 5 - i; k++) {
+            topLeftStars += "&nbsp;&nbsp;&nbsp;"
+        }
+        for (let j = 0; j < i; j++) {
+            topLeftStars += '* '
+        }
+        topLeftStars += '<br>';
+    }
+
+    for (let i = 1; i <= 5; i++) {
+        for (let j = 0; j < i; j++) {
+            topRightStars += '* '
+        }
+        topRightStars += '<br>';
+    }
+
+    for (let i = 5; i > 0; i--) {
+        for (let k = 0; k < 5 - i; k++) {
+            bottomLeftStars += "&nbsp;&nbsp;&nbsp;"
+        }
+        for (let j = 0; j < i; j++) {
+            bottomLeftStars += '* '
+        }
+        bottomLeftStars += '<br>';
+    }
 
     for (let i = 5; i > 0; i--) {
         for (let j = 0; j < i; j++) {
-            string += '*'
-            // console.log(string += '* ')
+            bottomRightStars += '* '
         }
-        string += '<br>';
+        bottomRightStars += '<br>';
     }
-    document.body.innerHTML = string
-}
-StarPattern()
+
+    document.querySelector('.top-left').innerHTML = topLeftStars
+    document.querySelector('.top-right').innerHTML = topRightStars
+    document.querySelector('.bottom-right').innerHTML = bottomRightStars
+    document.querySelector('.bottom-left').innerHTML = bottomLeftStars
+
+</script>
+</body>
+</html>
