@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Throttle Scroll</title>
+</head>
+<body style="height:2000px;">
+  <script>
+    const throttle = (func, limit) => {
+      let lastRun = 0;
+      return (...args) => {
+        const now = Date.now();
+        if (now - lastRun >= limit) {
+          lastRun = now;
+          func(...args);
+        }
+      };
+    };
+
+    const handleScroll = () => {
+      console.log("Throttled Scroll at", window.scrollY);
+    };
+
+    window.addEventListener("scroll", throttle(handleScroll, 500));
+  </script>
+</body>
+</html>
