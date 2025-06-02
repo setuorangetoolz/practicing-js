@@ -1,0 +1,49 @@
+//build pipe - left to right function composition
+const pipe =
+  (...fns) =>
+  (input) =>
+    fns.reduce((acc, fn) => fn(acc), input);
+
+const addOne = (x) => x + 1;
+const multiplyByTwo = (x) => x * 2;
+const subtractThree = (x) => x - 3;
+const composedFunction = pipe(addOne, multiplyByTwo, subtractThree);
+const result = composedFunction(5);
+console.log(result); // Output: 9
+
+//build once - a function that can only be called once
+const onceMy = (fn) => {
+  let called = false;
+  let result;
+
+  return (...args) => {
+    if (!called) {
+      called = true;
+      result = fn(...args);
+    }
+    return result;
+  };
+};
+const logOnceMy = onceMy((msg) => console.log(msg));
+logOnceMy("Hello, World!"); // Output: Hello, World!
+logOnceMy("This will not be logged."); // No output
+
+//build memoize - caching function results
+const memoize = (fn) => {
+  const cache = new Map();
+
+  return (...args) => {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    const result = fn(...args);
+    cache.set(key, result);
+    return result;
+  };
+};
+const fibonacci = memoize((n) => {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+});
+console.log(fibonacci(10)); // Output: 55 - here in the position of 10th Fibonacci number
