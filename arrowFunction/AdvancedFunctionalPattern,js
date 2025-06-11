@@ -81,3 +81,38 @@ const plusOne = x => x + 1;
 
 const asyncFlow = composeAsync(plusOne, delay);
 asyncFlow(3).then(console.log); // After 500ms → 7
+
+//partial - pre-fill segments
+const partial = (fn, ...fixedArgs)=> (...restArgs) => fn(...fixedArgs, ...restArgs);
+
+const greet = (greeting,name)=>`${greeting}, ${name}`;
+const sayHiTo = partial(greet,'hi');
+
+console.log(sayHiTo('Sam'));
+
+
+//practice
+//composeAsync
+const composeAsync1 = (...fns) =>{
+    async (input) => {
+        let result = input;
+        for (const fn of fns){
+            result = await fn(result)
+        }
+        return result;
+    }
+}
+const asncAddTwo = async (x) => x + 2; 
+const asncMultyThree = async (x) => x * 3;
+const asncSubTckFour = async (x) => x - 4;
+
+const composeAsyncFunc = composeAsync2(asncAddTwo,asncMultyThree,asncSubTckFour);
+const asncRes = composeAsyncFunc(5);
+asncRes.then((res)=>console.log(res));
+
+//partial
+const partial2 = (fn, ...fixedArgs) => (...restArgs) => fn(...fixedArgs,...restArgs);
+const wish = (wish, name)=>`${wish}, ${name}`;
+const wishGoodBye = partial2(wish,'Sam');
+console.log(wishGoodBye('GoodBye'));
+
